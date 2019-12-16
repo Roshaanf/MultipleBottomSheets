@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="CustomSheetsContainer">
+        <attr name="sheetsHeightDifference" format="dimension" />
+        <attr name="sheetsCount" format="integer" />
+        <attr name="sheetsTopCornerRadius" format="dimension" />
+
+    </declare-styleable>
+</resources>
