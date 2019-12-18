@@ -1,4 +1,4 @@
-package com.roshaan.example
+package com.roshaan.multiplebottomsheets
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -14,18 +14,21 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 
 /**
+ * MultipleSheetsContainer must have layout_height="match_parent" or defined in dp, wrap_content is not supported
  * Default minimumSheetsHeightDifference is 30dp
  * Default sheetsCount is 3
  * Default sheetsCornerRadius is 0dp
  * lower sheet will be added in last , lower sheet will have minimum heights
  * bottom sheets should be attached to the bottom of the screen i,e no view should be placed below bottom sheets
  *  */
-class CustomSheetsContainer : RelativeLayout {
+class MultipleSheetsContainer : RelativeLayout {
 
     private var sheetsCount: Int = DEFAULT_SHEETS_COUNT
     //   Values IN DP
-    private var minimumSheetsHeightDifference: Int = DEFAULT_MINIMUM_SHEETS_HEIGHT_DIFFERENCE
-    private var sheetsTopCornerRadius: Float = DEFAULT_SHEETS_TOP_CORNER_RADIUS
+    private var minimumSheetsHeightDifference: Int =
+        DEFAULT_MINIMUM_SHEETS_HEIGHT_DIFFERENCE
+    private var sheetsTopCornerRadius: Float =
+        DEFAULT_SHEETS_TOP_CORNER_RADIUS
 
 
     private val sheets = mutableListOf<CustomSheet>()
@@ -37,18 +40,24 @@ class CustomSheetsContainer : RelativeLayout {
 
         val typedArray = context.obtainStyledAttributes(
             attrs,
-            R.styleable.CustomSheetsContainer, 0, 0
+            R.styleable.MultipleSheetsContainer, 0, 0
         )
         sheetsCount =
-            typedArray.getInt(R.styleable.CustomSheetsContainer_sheetsCount, DEFAULT_SHEETS_COUNT)
+            typedArray.getInt(
+                R.styleable.MultipleSheetsContainer_sheetsCount,
+                DEFAULT_SHEETS_COUNT
+            )
         minimumSheetsHeightDifference =
             typedArray.getDimension(
-                R.styleable.CustomSheetsContainer_sheetsHeightDifference,
-                pxFromDp(context, DEFAULT_MINIMUM_SHEETS_HEIGHT_DIFFERENCE.toFloat()).toFloat()
+                R.styleable.MultipleSheetsContainer_sheetsHeightDifference,
+                pxFromDp(
+                    context,
+                    DEFAULT_MINIMUM_SHEETS_HEIGHT_DIFFERENCE.toFloat()
+                ).toFloat()
             ).toInt()
 
         sheetsTopCornerRadius = typedArray.getDimension(
-            R.styleable.CustomSheetsContainer_sheetsTopCornerRadius,
+            R.styleable.MultipleSheetsContainer_sheetsTopCornerRadius,
             DEFAULT_SHEETS_TOP_CORNER_RADIUS
         )
 
@@ -102,7 +111,8 @@ class CustomSheetsContainer : RelativeLayout {
 //            aligning sheet to the bottom of view
             params.addRule(ALIGN_PARENT_BOTTOM)
 
-            var sheet = CustomSheet(this.context)
+            var sheet =
+                CustomSheet(this.context)
             sheet.minHeight = minimumHeight
             sheet.maxHeight = maximumHeight
 

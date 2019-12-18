@@ -18,5 +18,7 @@ class MainActivity : AppCompatActivity() {
         sheetContainer.addFragment(0, BlankFragment())
         sheetContainer.addFragment(1, BlankFragment2())
         sheetContainer.addFragment(2, BlankFragment3())
+        sheetContainer.addFragment(3, BlankFragment4())
+        sheetContainer.addFragment(4, BlankFragment5())
     }
 }

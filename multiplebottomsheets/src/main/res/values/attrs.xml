@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <declare-styleable name="CustomSheetsContainer">
+    <declare-styleable name="MultipleSheetsContainer">
         <attr name="sheetsHeightDifference" format="dimension" />
         <attr name="sheetsCount" format="integer" />
         <attr name="sheetsTopCornerRadius" format="dimension" />
