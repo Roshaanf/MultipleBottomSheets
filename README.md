@@ -3,6 +3,8 @@
 
 MultipleBottomSheets is an Android library to implement multiple nested bottom sheets in Android.
 
+![](https://github.com/Roshaanf/MultipleBottomSheets/blob/master/CurveSheetDemo.gif)   ![](https://github.com/Roshaanf/MultipleBottomSheets/blob/master/DefaultSheetDemo.gif) 
+
 ## Download
 
 Add jcenter() in project level build.gradle.
