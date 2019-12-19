@@ -15,7 +15,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:sheetsCount="5"
-        app:sheetsHeightDifference="40dp"
+        app:sheetsHeightDifference="50dp"
         app:sheetsTopCornerRadius="20dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

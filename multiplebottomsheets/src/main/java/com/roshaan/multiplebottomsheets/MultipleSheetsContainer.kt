@@ -18,7 +18,7 @@ import androidx.fragment.app.Fragment
  * Default minimumSheetsHeightDifference is 30dp
  * Default sheetsCount is 3
  * Default sheetsCornerRadius is 0dp
- * lower sheet will be added in last , lower sheet will have minimum heights
+ * lower sheet will be added in last , lower sheet will have minimum heights, lower sheet will have heighest index
  * bottom sheets should be attached to the bottom of the screen i,e no view should be placed below bottom sheets
  *  */
 class MultipleSheetsContainer : RelativeLayout {

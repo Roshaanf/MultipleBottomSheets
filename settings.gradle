@@ -1,2 +1,2 @@
-include ':app', ':multiplebottomsheets'
-rootProject.name='BottomSheets'
+include ':sample', ':multiplebottomsheets'
+rootProject.name='MultipleBottomSheets'

@@ -10,7 +10,9 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/colorTitle"
+        android:textSize="@dimen/titleTextSize"
         android:layout_gravity="center_horizontal"
-        android:text="@string/hello_blank_fragment" />
+        android:text="Sheet 1" />
 
 </FrameLayout>
