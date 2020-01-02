@@ -7,6 +7,7 @@ import android.content.Context
 import android.view.MotionEvent
 import androidx.constraintlayout.widget.ConstraintLayout
 import android.util.DisplayMetrics
+import com.roshaan.multiplebottomsheets.MultipleSheetsContainer
 
 
 class MainActivity : AppCompatActivity() {
@@ -20,5 +21,10 @@ class MainActivity : AppCompatActivity() {
         sheetContainer.addFragment(2, BlankFragment3())
         sheetContainer.addFragment(3, BlankFragment4())
         sheetContainer.addFragment(4, BlankFragment5())
+
+         sheetContainer.lockedSheetIndex = 0
+
+
     }
+
 }

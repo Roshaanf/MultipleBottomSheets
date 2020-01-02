@@ -18,6 +18,7 @@ import androidx.fragment.app.Fragment
  * Default minimumSheetsHeightDifference is 30dp
  * Default sheetsCount is 3
  * Default sheetsCornerRadius is 0dp
+ * Default lockedSheetIndex is UNLOCKED
  * lower sheet will be added in last , lower sheet will have minimum heights, lower sheet will have heighest index
  * bottom sheets should be attached to the bottom of the screen i,e no view should be placed below bottom sheets
  *  */
@@ -29,6 +30,8 @@ class MultipleSheetsContainer : RelativeLayout {
         DEFAULT_MINIMUM_SHEETS_HEIGHT_DIFFERENCE
     private var sheetsTopCornerRadius: Float =
         DEFAULT_SHEETS_TOP_CORNER_RADIUS
+
+    var lockedSheetIndex = REMOVE_LOCK
 
 
     private val sheets = mutableListOf<CustomSheet>()
@@ -125,6 +128,8 @@ class MultipleSheetsContainer : RelativeLayout {
 
             sheets.add(sheet)
 
+            sheet.index = sheets.size - 1
+
         }
     }
 
@@ -151,13 +156,16 @@ class MultipleSheetsContainer : RelativeLayout {
 
 
                     /**
-                     *  drag effect only works if it is occured on top area of sheet height= minHeight
+                     *  drag effect works if it is occured on top area of sheet height= minHeight
                      *  not using event.rawY-sheet.y, because sheet.y returns y coordinate of view
                      *  w.r.t parent viewgroup and event.rawY returns actual location of event w.r.t whole screen
+                     *  || drag effect works if sheet is not locked, all the sheets having index >= to lockedSheetIndex will be
+                     *  considered as locked
                      */
                     shouldDrag =
-                        if ((event.rawY.toInt() - sheetActualCoordinatedOnScreen.get(1))
-                            > minimumSheetsHeightDifference
+                        if (((event.rawY.toInt() - sheetActualCoordinatedOnScreen.get(1))
+                                    > minimumSheetsHeightDifference) ||
+                            (lockedSheetIndex != REMOVE_LOCK && lockedSheetIndex <= (currentSheet as CustomSheet).index)
                         ) {
                             false
                         } else true
@@ -178,6 +186,7 @@ class MultipleSheetsContainer : RelativeLayout {
 //                        subtracting sheet's previous height from newHeight to be to get dragged area
                     var draggedYPixels = Math.abs(currentSheet.height - newHeight)
                     var isUpwardMotion = newHeight > currentSheet.height
+                    var isDownwardMotion = newHeight < currentSheet.height
 
 //                    view should respect its minimum height
                     if (newHeight < (currentSheet as CustomSheet).minHeight) {
@@ -185,6 +194,7 @@ class MultipleSheetsContainer : RelativeLayout {
                         newHeight = currentSheet.minHeight
                         draggedYPixels = Math.abs(currentSheet.height - newHeight)
                         isUpwardMotion = newHeight > currentSheet.height
+                        isDownwardMotion = newHeight < currentSheet.height
 
                     }
 //                    view should respect its max height
@@ -193,6 +203,7 @@ class MultipleSheetsContainer : RelativeLayout {
                         newHeight = currentSheet.maxHeight
                         draggedYPixels = Math.abs(currentSheet.height - newHeight)
                         isUpwardMotion = newHeight > currentSheet.height
+                        isDownwardMotion = newHeight < currentSheet.height
 
                     }
 //                           APPLYING CALCULATIONS TO SHEETS
@@ -205,7 +216,7 @@ class MultipleSheetsContainer : RelativeLayout {
                     if (isUpwardMotion) {
 
 //                                dragging each above sheet
-                        for (j in 0 until sheets.indexOf(currentSheet)) {
+                        for (j in 0 until currentSheet.index) {
 
                             var aboveSheet = sheets.get(j)
                             newHeight = aboveSheet.height + draggedYPixels
@@ -225,10 +236,10 @@ class MultipleSheetsContainer : RelativeLayout {
                         }
                     }
 //                            DOWNWARD MOTION DRAG SHEETS BELOW CURRENT SHEET ALSO
-                    else {
+                    else if (isDownwardMotion) {
 
 //                                dragging each below sheet
-                        for (j in sheets.indexOf(currentSheet) + 1 until sheets.size) {
+                        for (j in currentSheet.index + 1 until sheets.size) {
 
                             var belowSheet = sheets.get(j)
                             newHeight = belowSheet.height - draggedYPixels
@@ -244,6 +255,9 @@ class MultipleSheetsContainer : RelativeLayout {
                             }
 
                         }
+                    } else {
+//                        no motion
+                        return@setOnTouchListener true
                     }
 
 
@@ -294,6 +308,8 @@ class MultipleSheetsContainer : RelativeLayout {
 
         var maxHeight: Int = 0
         var minHeight: Int = 0
+
+        var index = -1
 
         var topCornerRadius = DEFAULT_SHEETS_TOP_CORNER_RADIUS
             set(value) {

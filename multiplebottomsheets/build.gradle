@@ -27,7 +27,7 @@ android {
 }
 
 ext{
-    versionName="1.0.0"
+    versionName="1.0.1"
 }
 
 
