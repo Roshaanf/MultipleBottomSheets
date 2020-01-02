@@ -21,7 +21,7 @@ Add dependency in app level build.gradle.
 
 ``` groovy
 dependencies{
-      implementation 'com.roshaan.multiplebottomsheets:multiplebottomsheets:1.0.0'
+      implementation 'com.roshaan.multiplebottomsheets:multiplebottomsheets:1.0.1'
 }
 ```
 
@@ -64,7 +64,10 @@ Associate fragment with each sheet using code.
         sheetContainer.addFragment(2, Sheet3Fragment())
         sheetContainer.addFragment(3, Sheet4Fragment())
         sheetContainer.addFragment(4, Sheet5Fragment())
+        
+        sheetContainer.lockedSheetIndex = 2
 ```
+* **sheetsContainer.lockedSheetIndex** locks the sheet at the specified index and sheets below that sheet. By default all sheets are unlocked, sheets lock can be removed by setting **sheetContainer.lockedSheetIndex=REMOVE_LOCK**.
 
 ## Limitations
 * Currently MultipleSheetsContainer supports layout_height="match_parent" or explicitly defined height, layout_height="wrap_content" is not supported. 
